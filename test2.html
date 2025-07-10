@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloomBee Media - Bringing Brands to Life</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Dancing+Script:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS for animations and effects */
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .bee-loader {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            animation: fly 2s ease-in-out infinite;
+        }
+
+        .bee-body {
+            width: 60px;
+            height: 40px;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+
+        .bee-stripes {
+            position: absolute;
+            width: 100%;
+            height: 6px;
+            background: #1f2937;
+            top: 8px;
+            border-radius: 3px;
+        }
+
+        .bee-stripes:nth-child(2) {
+            top: 18px;
+        }
+
+        .bee-stripes:nth-child(3) {
+            top: 28px;
+        }
+
+        .bee-wings {
+            position: absolute;
+            width: 25px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            top: -10px;
+            left: -5px;
+            animation: flap 0.3s ease-in-out infinite alternate;
+        }
+
+        .bee-wings:nth-child(5) {
+            left: 40px;
+            animation-delay: 0.1s;
+        }
+
+        @keyframes fly {
+            0%, 100% { transform: translateY(0px) rotate(-5deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes flap {
+            0% { transform: rotateX(0deg); }
+            100% { transform: rotateX(45deg); }
+        }
+
+        /* Sticky Sections */
+        .sticky-section {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .domain-makeup {
+            background: linear-gradient(135deg, #fce7f3, #f3e8ff, #fdf2f8);
+            z-index: 10;
+        }
+
+        .domain-anime {
+            background: linear-gradient(135deg, #0f0f23, #1a1a2e, #16213e);
+            z-index: 20;
+        }
+
+        .domain-moto {
+            background: linear-gradient(135deg, #111827, #1f2937, #374151);
+            z-index: 30;
+        }
+
+        .domain-tech {
+            background: linear-gradient(135deg, #0c4a6e, #0369a1, #0284c7);
+            z-index: 40;
+        }
+
+        /* Text Animations */
+        .glow-text {
+            text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+        }
+
+        .glitch {
+            position: relative;
+            animation: glitch 2s infinite;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            animation: glitch-1 0.5s infinite;
+            color: #ff0040;
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-2 0.5s infinite;
+            color: #00ffff;
+            z-index: -2;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(2px, -2px); }
+            40% { transform: translate(-2px, 2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(2px, 2px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(-2px, -2px); }
+        }
+
+        /* Chrome effect */
+        .chrome-text {
+            background: linear-gradient(45deg, #c0c0c0, #ffffff, #c0c0c0, #808080);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: chrome-shine 3s ease-in-out infinite;
+        }
+
+        @keyframes chrome-shine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Sparkle Animation */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fbbf24;
+            border-radius: 50%;
+            animation: sparkle 2s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Fade in animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hover effects */
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Custom fonts */
+        .font-cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .font-pixel {
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 2px;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .sticky-section {
+                padding: 2rem 1rem;
+            }
+            
+            .bee-loader {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .bee-body {
+                width: 45px;
+                height: 30px;
+            }
+        }
+
+        /* Parallax effect */
+        .parallax {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        /* Button pulse animation */
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(251, 191, 36, 0.8);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Loading Animation -->
+    <div id="loader" class="loader">
+        <div class="bee-loader">
+            <div class="bee-body">
+                <div class="bee-stripes"></div>
+                <div class="bee-stripes"></div>
+                <div class="bee-stripes"></div>
+                <div class="bee-wings"></div>
+                <div class="bee-wings"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-md transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-yellow-400">
+                    🐝 BloomBee Media
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link hover:text-yellow-400 transition-colors">Home</a>
+                    <a href="#about" class="nav-link hover:text-yellow-400 transition-colors">About</a>
+                    <a href="#services" class="nav-link hover:text-yellow-400 transition-colors">Services</a>
+                    <a href="#domains" class="nav-link hover:text-yellow-400 transition-colors">Domains</a>
+                    <a href="#contact" class="nav-link hover:text-yellow-400 transition-colors">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-yellow-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed top-0 left-0 right-0 bg-gray-900 z-40 transform -translate-y-full transition-transform duration-300 md:hidden">
+        <div class="pt-20 pb-8 px-6">
+            <a href="#home" class="block py-3 text-lg hover:text-yellow-400 transition-colors">Home</a>
+            <a href="#about" class="block py-3 text-lg hover:text-yellow-400 transition-colors">About</a>
+            <a href="#services" class="block py-3 text-lg hover:text-yellow-400 transition-colors">Services</a>
+            <a href="#domains" class="block py-3 text-lg hover:text-yellow-400 transition-colors">Domains</a>
+            <a href="#contact" class="block py-3 text-lg hover:text-yellow-400 transition-colors">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-yellow-900 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="fade-in">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 glow-text text-yellow-400">
+                    BloomBee Media
+                </h1>
+                <p class="text-xl md:text-3xl mb-8 text-gray-300">
+                    Bringing Brands to Life — One Post at a Time
+                </p>
+                <button class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-full text-lg font-semibold hover-glow transition-all duration-300 pulse-glow">
+                    Start Your Journey 🐝
+                </button>
+            </div>
+        </div>
+        <!-- Animated background elements -->
+        <div class="absolute top-20 left-10 w-4 h-4 bg-yellow-400 rounded-full sparkle"></div>
+        <div class="absolute top-40 right-20 w-3 h-3 bg-yellow-400 rounded-full sparkle" style="animation-delay: 0.5s;"></div>
+        <div class="absolute bottom-32 left-1/4 w-2 h-2 bg-yellow-400 rounded-full sparkle" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-20 right-1/3 w-5 h-5 bg-yellow-400 rounded-full sparkle" style="animation-delay: 1.5s;"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-yellow-400">About BloomBee</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    We're not just another marketing agency. We're digital storytellers, brand architects, and growth catalysts rolled into one buzzing hive of creativity.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center fade-in bg-gray-700 p-8 rounded-lg hover-glow transition-all duration-300">
+                    <div class="text-4xl mb-4">🎨</div>
+                    <h3 class="text-xl font-semibold mb-4 text-yellow-400">Creative Excellence</h3>
+                    <p class="text-gray-300">Crafting visually stunning content that stops the scroll and starts conversations.</p>
+                </div>
+                <div class="text-center fade-in bg-gray-700 p-8 rounded-lg hover-glow transition-all duration-300">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-xl font-semibold mb-4 text-yellow-400">Data-Driven Results</h3>
+                    <p class="text-gray-300">Every campaign is backed by analytics and optimized for maximum ROI.</p>
+                </div>
+                <div class="text-center fade-in bg-gray-700 p-8 rounded-lg hover-glow transition-all duration-300">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <h3 class="text-xl font-semibold mb-4 text-yellow-400">Growth Focused</h3>
+                    <p class="text-gray-300">We don't just manage your social media, we accelerate your business growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-yellow-400">Our Services</h2>
+                <p class="text-xl text-gray-300">Full-spectrum digital marketing solutions tailored to your brand</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-yellow-400 to-orange-500 p-6 rounded-lg text-gray-900 fade-in hover-glow transition-all duration-300">
+                    <h3 class="text-xl font-bold mb-3">Content Creation</h3>
+                    <p>Eye-catching visuals and compelling copy that resonates with your audience.</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-pink-500 p-6 rounded-lg fade-in hover-glow transition-all duration-300">
+                    <h3 class="text-xl font-bold mb-3">Campaign Management</h3>
+                    <p>Strategic campaigns that drive engagement and conversions across all platforms.</p>
+                </div>
+                <div class="bg-gradient-to-br from-blue-500 to-cyan-500 p-6 rounded-lg fade-in hover-glow transition-all duration-300">
+                    <h3 class="text-xl font-bold mb-3">Analytics & Insights</h3>
+                    <p>Deep-dive analytics to understand your audience and optimize performance.</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-500 to-emerald-500 p-6 rounded-lg fade-in hover-glow transition-all duration-300">
+                    <h3 class="text-xl font-bold mb-3">Brand Strategy</h3>
+                    <p>Comprehensive brand positioning and messaging that sets you apart.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Domain Experience Sections -->
+    <div id="domains">
+        <!-- Makeup & Accessories -->
+        <section class="sticky-section domain-makeup">
+            <div class="container mx-auto px-6 text-center relative">
+                <div class="fade-in">
+                    <h2 class="text-4xl md:text-6xl font-cursive font-bold mb-6 text-pink-600 glow-text">
+                        Glow Up Your Beauty Business
+                    </h2>
+                    <p class="text-2xl md:text-3xl text-pink-500 font-cursive">
+                        Let's slay together 💄💅
+                    </p>
+                    <div class="mt-8">
+                        <button class="bg-pink-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover-glow transition-all duration-300">
+                            Discover Beauty Marketing
+                        </button>
+                    </div>
+                </div>
+                <!-- Sparkle effects -->
+                <div class="absolute top-20 left-20 w-3 h-3 bg-pink-400 rounded-full sparkle"></div>
+                <div class="absolute top-32 right-32 w-4 h-4 bg-pink-500 rounded-full sparkle" style="animation-delay: 0.3s;"></div>
+                <div class="absolute bottom-40 left-1/4 w-2 h-2 bg-pink-300 rounded-full sparkle" style="animation-delay: 0.6s;"></div>
+                <div class="absolute bottom-20 right-20 w-5 h-5 bg-pink-400 rounded-full sparkle" style="animation-delay: 0.9s;"></div>
+            </div>
+        </section>
+
+        <!-- Anime/Pop Culture -->
+        <section class="sticky-section domain-anime">
+            <div class="container mx-auto px-6 text-center relative">
+                <div class="fade-in">
+                    <h2 class="text-4xl md:text-6xl font-pixel font-bold mb-6 text-cyan-400 glitch" data-text="From One Piece to Demon Slayer">
+                        From One Piece to Demon Slayer
+                    </h2>
+                    <p class="text-2xl md:text-3xl text-purple-400 font-pixel">
+                        We Know Your Anime Audience 🗾
+                    </p>
+                    <div class="mt-8">
+                        <button class="bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover-glow transition-all duration-300">
+                            Level Up Your Brand
+                        </button>
+                    </div>
+                </div>
+                <!-- Neon effects -->
+                <div class="absolute top-10 left-10 w-20 h-1 bg-cyan-400 opacity-70" style="box-shadow: 0 0 10px #00ffff;"></div>
+                <div class="absolute bottom-10 right-10 w-16 h-1 bg-purple-400 opacity-70" style="box-shadow: 0 0 10px #8b5cf6;"></div>
+            </div>
+        </section>
+
+        <!-- Motorcycle/Auto Content -->
+        <section class="sticky-section domain-moto">
+            <div class="container mx-auto px-6 text-center relative">
+                <div class="fade-in">
+                    <h2 class="text-4xl md:text-6xl font-bold mb-6 chrome-text">
+                        Fuel the Feed
+                    </h2>
+                    <p class="text-2xl md:text-3xl text-gray-300">
+                        Power Up Your Motor Brand 🏍️
+                    </p>
+                    <div class="mt-8">
+                        <button class="bg-gradient-to-r from-gray-600 to-gray-800 text-white px-8 py-4 rounded-full text-lg font-semibold hover-glow transition-all duration-300 border border-gray-500">
+                            Rev Up Your Marketing
+                        </button>
+                    </div>
+                </div>
+                <!-- Chrome accents -->
+                <div class="absolute top-20 left-20 w-32 h-2 bg-gradient-to-r from-gray-400 to-white opacity-60"></div>
+                <div class="absolute bottom-20 right-20 w-24 h-2 bg-gradient-to-r from-white to-gray-400 opacity-60"></div>
+            </div>
+        </section>
+
+        <!-- Tech Startups -->
+        <section class="sticky-section domain-tech">
+            <div class="container mx-auto px-6 text-center relative">
+                <div class="fade-in">
+                    <h2 class="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                        Design. Build. Conquer
+                    </h2>
+                    <p class="text-2xl md:text-3xl text-blue-300">
+                        Marketing for the Innovators 🚀
+                    </p>
+                    <div class="mt-8">
+                        <button class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover-glow transition-all duration-300">
+                            Launch Your Success
+                        </button>
+                    </div>
+                </div>
+                <!-- Futuristic elements -->
+                <div class="absolute top-16 left-16 w-16 h-16 border-2 border-blue-400 rounded-full opacity-30 animate-spin"></div>
+                <div class="absolute bottom-16 right-16 w-12 h-12 border-2 border-cyan-400 rounded-full opacity-40 animate-pulse"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Final CTA Section -->
+    <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="fade-in">
+                <h2 class="text-5xl md:text-7xl font-bold mb-8 text-white glow-text">
+                    Ready to Bloom With Us?
+                </h2>
+                <p class="text-xl md:text-2xl mb-12 text-white/90">
+                    Let's create something extraordinary together
+                </p>
+                <button id="cta-button" class="bg-white text-gray-900 px-12 py-6 rounded-full text-xl font-bold hover-glow transition-all duration-300 pulse-glow">
+                    🐝 Let's Buzz Together
+                </button>
+            </div>
+        </div>
+        <!-- Animated bees -->
+        <div class="absolute top-20 left-20 bee-loader" style="animation-duration: 3s; animation-delay: 0s;"></div>
+        <div class="absolute bottom-32 right-32 bee-loader" style="animation-duration: 2.5s; animation-delay: 1s;"></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-yellow-400">Get In Touch</h2>
+                <p class="text-xl text-gray-300">Ready to take your brand to the next level? Let's talk!</p>
+            </div>
+            <div class="max-w-2xl mx-auto">
+                <form id="contact-form" class="space-y-6 fade-in">
+                    <div>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required
+                               class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-yellow-400 transition-colors">
+                        <div id="name-error" class="text-red-400 text-sm mt-1 hidden"></div>
+                    </div>
+                    <div>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required
+                               class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-yellow-400 transition-colors">
+                        <div id="email-error" class="text-red-400 text-sm mt-1 hidden"></div>
+                    </div>
+                    <div>
+                        <textarea id="message" name="message" rows="5" placeholder="Your Message" required
+                                  class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-yellow-400 transition-colors resize-none"></textarea>
+                        <div id="message-error" class="text-red-400 text-sm mt-1 hidden"></div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-full text-lg font-semibold hover-glow transition-all duration-300 pulse-glow">
+                            Send Message 🐝
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-12">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="text-3xl font-bold text-yellow-400 mb-4">🐝 BloomBee Media</div>
+                <p class="text-gray-400 mb-6">Bringing Brands to Life — One Post at a Time</p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors text-2xl">📘</a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors text-2xl">📷</a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors text-2xl">🐦</a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors text-2xl">💼</a>
+                </div>
+                <div class="border-t border-gray-700 pt-6">
+                    <p class="text-gray-500">&copy; 2024 BloomBee Media. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 2000);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('-translate-y-full');
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('-translate-y-full');
+                }
+            });
+        });
+
+        // CTA Button Scroll to Contact
+        document.getElementById('cta-button').addEventListener('click', function() {
+            document.getElementById('contact').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        // Intersection Observer for Fade-in Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar Background on Scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-gray-900/95');
+            } else {
+                navbar.classList.remove('bg-gray-900/95');
+            }
+        });
+
+        // Parallax Effect for Hero Section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax');
+            
+            parallaxElements.forEach(element => {
+                const speed = element.dataset.speed || 0.5;
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Form Validation
+        const contactForm = document.getElementById('contact-form');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+
+        function showError(inputId, message) {
+            const errorElement = document.getElementById(inputId + '-error');
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+            document.getElementById(inputId).classList.add('border-red-400');
+        }
+
+        function hideError(inputId) {
+            const errorElement = document.getElementById(inputId + '-error');
+            errorElement.classList.add('hidden');
+            document.getElementById(inputId).classList.remove('border-red-400');
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let isValid = true;
+
+            // Reset errors
+            hideError('name');
+            hideError('email');
+            hideError('message');
+
+            // Validate name
+            if (nameInput.value.trim().length < 2) {
+                showError('name', 'Name must be at least 2 characters long');
+                isValid = false;
+            }
+
+            // Validate email
+            if (!validateEmail(emailInput.value.trim())) {
+                showError('email', 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            // Validate message
+            if (messageInput.value.trim().length < 10) {
+                showError('message', 'Message must be at least 10 characters long');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Simulate form submission
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Sending... 🐝';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    alert('Thank you for your message! We\'ll get back to you soon. 🐝');
+                    contactForm.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 2000);
+            }
+        });
+
+        // Add sparkle effects randomly
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 2000);
+        }
+
+        // Create sparkles periodically
+        setInterval(createSparkle, 3000);
+
+        // Add hover effects to service cards
+        document.querySelectorAll('.hover-glow').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Smooth reveal animation for sticky sections
+        const stickyObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        document.querySelectorAll('.sticky-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.8s ease-out';
+            stickyObserver.observe(section);
+        });
+    </script>
+</body>
+</html>
